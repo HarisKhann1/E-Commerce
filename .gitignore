@@ -1,0 +1,21 @@
+# Ignore the virtual environment folder
+env/
+
+# Ignore Django's default SQLite database file (if using SQLite)
+*.sqlite3
+
+# Ignore Python bytecode files
+*.pyc
+*.pyo
+__pycache__/
+
+# Ignore IDE and editor-specific files (VSCode, PyCharm, etc.)
+.vscode/
+.idea/
+
+# Ignore static files that are generated in production
+/staticfiles/
+
+# Ignore other common files and folders
+*.log
+*.db

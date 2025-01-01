@@ -14,3 +14,11 @@ class Sub_Category(models.Model):
     
     def __str__(self):
         return self.name
+    
+class Product(models.Model):
+    image = models.ImageField(upload_to='product_images/')
+    name = models.CharField(max_length=150)
+    price = models.FloatField()
+    date = models.DateField(auto_now_add=True)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, default=1)
+    sub_category = models.ForeignKey(Sub_Category, on_delete=models.CASCADE, default=1)

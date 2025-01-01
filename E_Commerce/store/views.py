@@ -1,16 +1,14 @@
 from django.shortcuts import render
-from .models import Category, Sub_Category
+from .models import Category, Product
 
 # Create your views here.
-def categories():
-    categories = Category.objects.all()
-    sub_categories = Sub_Category.objects.all()
-    
-    return {
-        'categories': categories,
-        'sub_categories': sub_categories
-    }
-
 def index(request):
-    context = categories()
+    categories = Category.objects.all()
+    products = Product.objects.all()
+    
+    context = {
+        'categories': categories,
+        'products': products
+    }
+    
     return render(request, 'index.html', context)

@@ -1,0 +1,46 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+<section id="form" style="margin-right: 35%;"><!--form-->
+    <div class="container">
+        <div class="row">
+             
+            <div class="col-sm-4">
+                <div class="signup-form"><!--sign up form-->
+                    <h2>Sign UP</h2>
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            {{ form.username }}
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Email</label>
+                            {{ form.email }}
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            {{ form.password1 }}
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Confirm Password</label>
+                            {{ form.password2 }}
+                        </div>
+                        <div class="form-group">
+                            {% if form.errors %}
+                                <div class="alert alert-danger">
+                                    {{ form.errors }}
+                                </div>
+                            {% endif %}
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+                    </form>
+                    <p class="text-center">already have an account? <a href="{% url "signin" %}">Sign In</a></p>
+                </div><!--/sign up form-->
+            </div>
+        </div>
+    </div>
+</section><!--/form-->
+
+{% endblock content %}

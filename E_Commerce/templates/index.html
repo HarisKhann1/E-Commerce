@@ -29,11 +29,13 @@
 <body>
     {% include "Header/header.html" %}
 
-    <main>
-        {% include "Main/slider.html" %}
-        {% include "Main/section.html" %}
-    </main>
-
+    {% block content %}
+        <main>
+            {% include "Main/slider.html" %}
+            {% include "Main/section.html" %}
+        </main>
+    {% endblock content %}
+    
     {% include "Footer/footer.html" %}
 
 

@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from .forms import RegistrationForm, LoginForm, PasswordResetForm
-from .models import Category, Product
+from .models import Category, Product, Contact
 from django.core.mail import send_mail
 
 from django.contrib.auth.decorators import login_required
@@ -114,6 +114,21 @@ def cart_clear(request):
 @login_required(login_url="/signin")
 def cart_detail(request):
     return render(request, 'cart/cart_detail.html')
+
+
+def contact(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        subject = request.POST.get('subject')
+        message = request.POST.get('message')
+
+        Contact.objects.create(name=name, email=email, subject=subject, message=message)
+        messages.success(request, "Your message has been sent successfully.")
+
+        return redirect('contact')
+
+    return render(request, 'contact/contact.html')
 
 
 

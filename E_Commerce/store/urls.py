@@ -8,6 +8,7 @@ urlpatterns = [
     path('signin/', views.user_login, name='signin'),
     path('signup/', views.signup, name='signup'),
     path('logout/', LogoutView.as_view(), name='logout'),
+    path('contact/', views.contact, name='contact'),
 
     # card urls
     path('cart/add/<int:id>/', views.cart_add, name='cart_add'),

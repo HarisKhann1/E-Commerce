@@ -62,12 +62,18 @@
                             <li><a href="#"><i class="fa fa-user"></i> Account</a></li>
                             <li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
                             <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-                            <li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+                            <li><a href="{% url "cart_detail" %}"><i class="fa fa-shopping-cart"></i> Cart 
+                                <span class="badge bg-secondary">{{ request.session.cart|length }}</span>
+                            </a></li>
                             {% if user.is_authenticated %}
-                                <form action="{% url 'logout' %}" method="POST">
-                                    {% csrf_token %}
-                                    <button type="submit"><i class="fa fa-lock"></i> Logout</button>
-                                </form>
+                                <li>
+                                    <form action="{% url 'logout' %}" method="POST" >
+                                        {% csrf_token %}
+                                        <button type="submit" style="background: none; border: none; color: inherit; padding: 0; font: inherit; cursor: pointer;">
+                                            <i class="fa fa-lock"></i> Logout
+                                        </button>
+                                    </form>
+                                </li>
                             {% else %}
                                 <li><a href="{% url "signin" %}"><i class="fa fa-lock"></i> Login </a></li>
                             {% endif %}
@@ -92,7 +98,7 @@
                     </div>
                     <div class="mainmenu pull-left">
                         <ul class="nav navbar-nav collapse navbar-collapse">
-                            <li><a href="index.html" class="active">Home</a></li>
+                            <li><a href="{% url "index" %}" class="active">Home</a></li>
                             <li class="dropdown"><a href="#">Shop<i class="fa fa-angle-down"></i></a>
                                 <ul role="menu" class="sub-menu">
                                     <li><a href="shop.html">Products</a></li>

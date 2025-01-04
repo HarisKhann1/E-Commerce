@@ -6,6 +6,8 @@ from .forms import RegistrationForm, LoginForm, PasswordResetForm
 from .models import Category, Product
 from django.core.mail import send_mail
 
+from django.contrib.auth.decorators import login_required
+from cart.cart import Cart
 
 # Create your views here.
 def index(request):
@@ -66,6 +68,72 @@ def user_login(request):
     return render(request, 'Auth/login.html', {'form': form, 'messages': messages})
 
 
+
+# card views logic here
+
+
+@login_required(login_url="/signin")
+def cart_add(request, id):
+    cart = Cart(request)
+    product = Product.objects.get(id=id)
+    cart.add(product=product)
+    return redirect('index')
+
+
+@login_required(login_url="/signin")
+def item_clear(request, id):
+    cart = Cart(request)
+    product = Product.objects.get(id=id)
+    cart.remove(product)
+    return redirect("cart_detail")
+
+
+@login_required(login_url="/signin")
+def item_increment(request, id):
+    cart = Cart(request)
+    product = Product.objects.get(id=id)
+    cart.add(product=product)
+    return redirect("cart_detail")
+
+
+@login_required(login_url="/signin")
+def item_decrement(request, id):
+    cart = Cart(request)
+    product = Product.objects.get(id=id)
+    cart.decrement(product=product)
+    return redirect("cart_detail")
+
+
+@login_required(login_url="/signin")
+def cart_clear(request):
+    cart = Cart(request)
+    cart.clear()
+    return redirect("cart_detail")
+
+
+@login_required(login_url="/signin")
+def cart_detail(request):
+    return render(request, 'cart/cart_detail.html')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 """
 
 def password_reset(request):
@@ -98,6 +166,5 @@ def password_reset_confirm(request):
     return render(request, 'Auth/password_reset_confirm.html')
 
 
-
-
 """
+

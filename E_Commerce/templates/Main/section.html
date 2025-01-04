@@ -9,7 +9,7 @@
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordian" href="#{{ category.id }}">
+                                    <a data-toggle="collapse" data-parent="#accordian" href="{{ category.id }}">
                                         <span class="badge pull-right"><i class="fa fa-plus"></i></span>
                                         {{ category.name }}
                                     </a>
@@ -71,13 +71,13 @@
                                         <img width=200 height=200 src="{{ product.image.url }}" alt="" />
                                         <h2>Rs. {{ product.price }}</h2>
                                         <p>{{ product.name }}</p>
-                                        <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                        <a href="{% url 'cart_add' product.id %}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                     </div>
                                     <div class="product-overlay">
                                         <div class="overlay-content">
                                             <h2>Rs. {{ product.price }}</h2>
                                             <p>{{ product.name }}</p>
-                                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                            <a href="{% url 'cart_add' product.id %}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                         </div>
                                     </div>
                             </div>

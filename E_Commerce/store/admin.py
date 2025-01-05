@@ -14,7 +14,7 @@ class ContactAdmin(admin.ModelAdmin):
     list_display = ('name', 'email', 'subject', 'message')
 
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ('user','product', 'quantity', 'price', 'address', 'phone', 'date')
+    list_display = ('user','product', 'quantity', 'price', 'address', 'phone', 'date', 'total')
 
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Sub_Category, SubCategoryAdmin)

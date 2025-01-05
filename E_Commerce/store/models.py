@@ -41,6 +41,7 @@ class Order(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, default='')
     quantity = models.IntegerField()
     price = models.FloatField()
+    total = models.FloatField(default=0)
     address = models.TextField()
     phone = models.CharField(max_length=11)
     date = models.DateField(auto_now_add=True)

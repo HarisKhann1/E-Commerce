@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from .forms import RegistrationForm, LoginForm, PasswordResetForm
-from .models import Category, Product, Contact
+from .models import Category, Product, Contact, Order
 from django.core.mail import send_mail
 
 from django.contrib.auth.decorators import login_required
@@ -13,7 +13,6 @@ from cart.cart import Cart
 def index(request):
     categories = Category.objects.all()
     category_id = request.GET.get('category')
-
     if category_id:
         products = Product.objects.filter(sub_category_id = category_id).order_by('-id')
         if not products:
@@ -67,11 +66,29 @@ def user_login(request):
         form = LoginForm()
     return render(request, 'Auth/login.html', {'form': form, 'messages': messages})
 
+# order views logic here
+@login_required(login_url="/signin")
+def order(request):
+    if request.method == 'POST':
+        phone = request.POST.get('phone')
+        address = request.POST.get('address')
+        card = request.session.get('cart');
+        u_id = request.user.id
+        user = User.objects.get(id = u_id)
+        if user:
+            for key, value in card.items():
+                product = Product.objects.get(id=key)
+                quantity = value.get('quantity')
+                price = value.get('price')
+                total = float(price) * float(quantity) 
+                
+                Order.objects.create(user=user, product=product, quantity=quantity, price=price, total=total, phone=phone, address=address)
+
+        messages.success(request, "Your order has been placed successfully.")
+        return redirect('index')
 
 
 # card views logic here
-
-
 @login_required(login_url="/signin")
 def cart_add(request, id):
     cart = Cart(request)

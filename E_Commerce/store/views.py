@@ -64,7 +64,7 @@ def user_login(request):
             messages.error(request, "Please fill in valid information.")
     else:
         form = LoginForm()
-    return render(request, 'Auth/login.html', {'form': form, 'messages': messages})
+    return render(request, 'Auth/login.html', {'form': form})
 
 # order views logic here
 @login_required(login_url="/signin")
@@ -83,7 +83,7 @@ def order(request):
                 total = float(price) * float(quantity) 
                 
                 Order.objects.create(user=user, product=product, quantity=quantity, price=price, total=total, phone=phone, address=address)
-
+                cart_clear(request)
         messages.success(request, "Your order has been placed successfully.")
         return redirect('index')
 
@@ -95,7 +95,6 @@ def cart_add(request, id):
     product = Product.objects.get(id=id)
     cart.add(product=product)
     return redirect('index')
-
 
 @login_required(login_url="/signin")
 def item_clear(request, id):

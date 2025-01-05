@@ -1,0 +1,60 @@
+{% extends "index.html" %}
+{% load cart_tag %}
+{% block content %}
+
+<div class="container">
+
+    <section id="cart_items">
+		<div class="container">
+			<div class="breadcrumbs">
+				<ol class="breadcrumb">
+				  <li><a href="{% url "index" %}">Home</a></li>
+				  <li class="active">Shopping history</li>
+				</ol>
+			</div>
+			<div class="table-responsive cart_info">
+				<table class="table table-condensed">
+					<thead>
+						<tr class="cart_menu">
+							<td class="image">Item</td>
+							<td class="description"></td>
+							<td class="price">Price</td>
+							<td class="quantity">Quantity</td>
+							<td class="total">Total</td>
+							<td></td>
+						</tr>
+					</thead>
+					<tbody>
+                        {% for data in order_data %}
+						<tr>
+							<td class="cart_product">
+								<a href=""><img width="50" height="50" src="{{ data.image.url }}" alt=""></a>
+							</td>
+							<td class="cart_description">
+								<p>{{ data.name }}</p>
+							</td>
+							<td>
+								<p>{{ data.price }}</p>
+							</td>
+							<td class="cart_quantity">
+								<div class="cart_quantity_button">
+									<span>{{ data.quantity }}</span>
+								</div>
+							</td>
+							<td class="cart_total">
+								<p>{{ data.total }}</p>
+							</td>
+						</tr>
+                        {% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</section> <!--/#cart_items-->
+
+</div>
+
+{% endblock content  %}
+
+
+

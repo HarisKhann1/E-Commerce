@@ -87,6 +87,33 @@ def order(request):
         messages.success(request, "Your order has been placed successfully.")
         return redirect('index')
 
+# showing user orders
+@login_required(login_url="/signin")
+def user_orders(request):
+    u_id = request.user.id
+    orders = Order.objects.filter(user_id = u_id)
+
+    order_data = []
+    for order in orders:
+        image = order.product.image
+        name = order.product.name
+        price = order.price
+        quantity = order.quantity
+        total = order.total
+
+        order_data.append({
+            'image': image,
+            'name': name,
+            'price': price,
+            'quantity': quantity,
+            'total': total
+        })
+    
+    context = {'order_data': order_data}
+   
+        
+    return render(request, 'cart/user_orders.html', context)
+
 
 # card views logic here
 @login_required(login_url="/signin")

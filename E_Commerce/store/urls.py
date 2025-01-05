@@ -10,6 +10,7 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(), name='logout'),
     path('contact/', views.contact, name='contact'),
     path('order/', views.order, name='order'),
+    path('user-orders/', views.user_orders, name='user_orders'),
 
     # card urls
     path('cart/add/<int:id>/', views.cart_add, name='cart_add'),

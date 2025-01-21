@@ -11,7 +11,8 @@ urlpatterns = [
     path('contact/', views.contact, name='contact'),
     path('order/', views.order, name='order'),
     path('user-orders/', views.user_orders, name='user_orders'),
-
+    path('product-detail/<int:id>', views.product_detail, name='product_detail'),   
+    path('search-product/', views.search_product, name='search_product'),
     # card urls
     path('cart/add/<int:id>/', views.cart_add, name='cart_add'),
     path('cart/item_clear/<int:id>/', views.item_clear, name='item_clear'),
@@ -20,7 +21,7 @@ urlpatterns = [
     path('cart/item_decrement/<int:id>/',
          views.item_decrement, name='item_decrement'),
     path('cart/cart_clear/', views.cart_clear, name='cart_clear'),
-    path('cart/cart-detail/',views.cart_detail,name='cart_detail'),   
+    path('cart/cart-detail/',views.cart_detail,name='cart_detail'),
 ]
 
 '''

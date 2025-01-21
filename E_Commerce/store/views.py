@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from .forms import RegistrationForm, LoginForm, PasswordResetForm
-from .models import Category, Product, Contact, Order
+from .models import Category, Product, Contact, Order, Brand
 from django.core.mail import send_mail
 
 from django.contrib.auth.decorators import login_required
@@ -12,17 +12,28 @@ from cart.cart import Cart
 # Create your views here.
 def index(request):
     categories = Category.objects.all()
+    brands = Brand.objects.all()
+    brand_id = request.GET.get('brand')
+    range = request.GET.get('range')
+    
+    print(range)
     category_id = request.GET.get('category')
     if category_id:
         products = Product.objects.filter(sub_category_id = category_id).order_by('-id')
         if not products:
-           products = Product.objects.all()[:6] 
+           products = Product.objects.all()[:6]
+    elif brand_id: 
+        products = Product.objects.filter(brand_id = brand_id).order_by('-id')
+        if not products:
+            products = Product.objects.all()[:6]
     else:
         products = Product.objects.all()[:6]
     
     context = {
         'categories': categories,
-        'products': products
+        'products': products,
+        'brands': brands
+
     }
     
     return render(request, 'index.html', context)
@@ -172,6 +183,35 @@ def contact(request):
         return redirect('contact')
 
     return render(request, 'contact/contact.html')
+
+def product_detail(request, id=None):
+
+    if id:
+        product_info = Product.objects.get(id=int(id))
+        
+    else:
+        product_info = None
+        messages.error(request, "Product not found.")
+
+    context = {
+        'product_info': product_info
+    }
+
+    return render(request, 'Main/product_detail.html', context)
+
+
+def search_product(request):
+    search = request.GET.get('search')
+
+    if search:
+        products = Product.objects.filter(name__icontains=search)
+    
+    context = {
+            'products': products,
+            'search': search
+        }
+    return render(request, 'Main/search_product.html', context)
+            
 
 
 

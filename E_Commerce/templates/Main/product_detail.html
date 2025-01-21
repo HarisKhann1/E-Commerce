@@ -1,0 +1,33 @@
+{% extends "index.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="product-details"><!--product-details-->
+    {% comment %} {% for p in product_info %} {% endcomment %}
+    <div class="col-sm-5">
+        <div class="view-product">
+            <img src="{{ product_info.image.url }}" alt="{{ product_info.name }}" />
+        </div>
+    </div>
+    <div class="col-sm-7">
+        <div class="product-information"><!--/product-information-->
+            <img src="images/product-details/new.jpg" class="newarrival" alt="" />
+            <h2>{{ product_info.name }}</h2>
+            <img src="images/product-details/rating.png" alt="" />
+            <span>
+                <span>Rs.{{ product_info.price }}</span>
+                <a href="{% url 'cart_add' product_info.id %}" type="button" class="btn btn-fefault cart">
+                    <i class="fa fa-shopping-cart"></i>
+                    Add to cart
+                </a>
+            </span>
+            <p><b>Availability:</b> {{ product_info.stock }}</p>
+            <p><b>Condition:</b> New</p>
+            <p><b>Brand:</b> {{ product_info.brand }}</p>
+            <a href=""><img src="images/product-details/share.png" class="share img-responsive"  alt="" /></a>
+        </div><!--/product-information-->
+    </div>
+    {% comment %} {% endfor %} {% endcomment %}
+</div><!--/product-details-->
+</div>
+{% endblock content %}

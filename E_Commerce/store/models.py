@@ -16,13 +16,27 @@ class Sub_Category(models.Model):
     def __str__(self):
         return self.name
     
+class Brand(models.Model):
+    name = models.CharField(max_length=150)
+    
+    def __str__(self):
+        return self.name
+
 class Product(models.Model):
+
+    stocks = (
+        ('Available', 'Available'),
+        ('Not Available', 'Not Available')
+    )
+
     image = models.ImageField(upload_to='product_images/')
     name = models.CharField(max_length=150)
+    brand = models.ForeignKey(Brand, on_delete=models.CASCADE, null=True, blank=True)   
     price = models.FloatField()
     date = models.DateField(auto_now_add=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, default=1)
     sub_category = models.ForeignKey(Sub_Category, on_delete=models.CASCADE, default=1)
+    stock = models.CharField(max_length=50, choices=stocks, default='Available', null=True,)
 
     def __str__(self):
         return self.name

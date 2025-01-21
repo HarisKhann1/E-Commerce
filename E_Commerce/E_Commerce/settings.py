@@ -24,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-%zpplcqaca(!zt&lz1kuo*2lhh!=fh1xx23_q_#!hh*a(v500e'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -151,10 +151,10 @@ LOGOUT_REDIRECT_URL = 'index'
 # for email sending
 
 # Email Settings for Production (SMTP example)
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'  # Replace with your email host
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'your email'  # Your email address
-EMAIL_HOST_PASSWORD = 'your password'  # Your email password or app password
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.gmail.com'  # Replace with your email host
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# EMAIL_HOST_USER = 'your email'  # Your email address
+# EMAIL_HOST_PASSWORD = 'your password'  # Your email password or app password
 
